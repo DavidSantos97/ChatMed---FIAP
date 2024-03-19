@@ -1,6 +1,8 @@
 package br.com.fiap.chatmed.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,15 +14,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.materialIcon
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -92,16 +97,14 @@ fun CadastroScreen() {
 
     Box(modifier = Modifier
         .fillMaxSize()
-        .background(Color.White)){
-
-
-
+        .background(Color.White)
+    ){
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(20.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Center,
 
         ) {
             Row (
@@ -139,7 +142,7 @@ fun CadastroScreen() {
             Row {
                 OutlinedTextField(
                     modifier = Modifier
-                        .padding(top = 30.dp, start = 15.dp, end = 15.dp)
+                        .padding(top = 60.dp, start = 15.dp, end = 15.dp)
                         .fillMaxWidth(),
                     value = nomeState.value,
                     onValueChange = { nomeState.value = it},
@@ -351,7 +354,12 @@ fun CadastroScreen() {
                 Checkbox(
                     checked = chekedState.value,
                     onCheckedChange = {chekedState.value = it},
-                    modifier = Modifier.padding(horizontal = 8.dp)
+                    modifier = Modifier.padding(horizontal = 8.dp),
+                    colors = CheckboxDefaults.colors(
+                        checkmarkColor = Color(0xFF17DB2E),
+                        checkedColor = Color.White,
+                        uncheckedColor = Color.Gray
+                    )
                 )
                 Column {
                    val text = buildAnnotatedString {
@@ -368,7 +376,7 @@ fun CadastroScreen() {
                         append("and ")
                         withStyle(style = SpanStyle(color = Color(0xFF17DB2E))) {
                             addStringAnnotation(
-                                tag = "LINK",
+                                tag = "URL",
                                 annotation = "https://www.google.com.br",
                                 start = length,
                                 end = length + 21
@@ -380,7 +388,7 @@ fun CadastroScreen() {
                     ClickableText(text = text,
                         onClick = {offset ->
                             val annotations = text.getStringAnnotations(
-                                tag = "LINK",
+                                tag = "URL",
                                 start = offset,
                                 end = offset
                             )
@@ -397,11 +405,37 @@ fun CadastroScreen() {
 
             }
             Row(
-                
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 50.dp),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+
             ) {
-                Button(onClick = { /*TODO*/ }) {
-                    
+                Button(
+                    modifier = Modifier
+                        .size(width = 300.dp, height = 48.dp),
+                    onClick = { /*TODO*/ },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF17DB2E)
+                    )
+                ) {
+                    Text(
+                        text = "Enviar",
+                        color = Color.White,
+                        fontSize = 18.sp
+                    )
+
                 }
+
+            }
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(text = "Dont have an account?")
 
             }
         }
