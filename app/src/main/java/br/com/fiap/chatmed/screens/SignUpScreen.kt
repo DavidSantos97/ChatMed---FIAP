@@ -27,7 +27,7 @@ import br.com.fiap.chatmed.R
 import br.com.fiap.chatmed.ui.theme.ChatMEDTheme
 
 @Composable
-fun LoginScreen(){
+fun SignUpScreen(){
 
     Box(
         modifier = Modifier
@@ -36,7 +36,9 @@ fun LoginScreen(){
     )
     {
         Column (
-            modifier = Modifier.fillMaxSize().padding(20.dp),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(20.dp),
             verticalArrangement = Arrangement.Center
         ) {
             Row(horizontalArrangement = Arrangement.Center, modifier = Modifier
@@ -150,8 +152,8 @@ fun LoginScreen(){
 
 @Preview(showBackground = true)
 @Composable
-fun loginScreenPreview() {
+fun signUpScreenPreview() {
     ChatMEDTheme {
-        LoginScreen()
+        SignUpScreen()
     }
 }

@@ -1,6 +1,7 @@
 package br.com.fiap.chatmed.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
@@ -29,6 +30,7 @@ import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -49,6 +51,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -88,12 +91,6 @@ fun CadastroScreen() {
     val senhaVisibility = remember { mutableStateOf(false) }
 
     val keyboardController = LocalSoftwareKeyboardController.current
-    
-    //val textFieldColors = TextFieldDefaults.colors(cursorColor = Color.Transparent)
-    //val outlineTextFieldColors = OutlinedTextFieldDefaults.colors(
-    //    focusedBorderColor = Color(0xFF17DB2E),
-    //    unfocusedBorderColor = Color.Gray
-    //)
 
     Box(modifier = Modifier
         .fillMaxSize()
@@ -104,7 +101,7 @@ fun CadastroScreen() {
                 .fillMaxSize()
                 .padding(20.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
+            //verticalArrangement = Arrangement.Center,
 
         ) {
             Row (
@@ -139,6 +136,7 @@ fun CadastroScreen() {
                 }
 
             }
+            Spacer(modifier = Modifier.padding(20.dp))
             Row {
                 OutlinedTextField(
                     modifier = Modifier
@@ -404,6 +402,7 @@ fun CadastroScreen() {
 
 
             }
+            Spacer(modifier = Modifier.padding(10.dp))
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -435,8 +434,16 @@ fun CadastroScreen() {
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = "Dont have an account?")
-
+                Text(text = "Já possui cadastro ?  ",
+                    fontSize = 15.sp
+                )
+                Text(text = "Entre",
+                    color = Color(0xFF17DB2E),
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 15.sp,
+                    modifier = Modifier
+                        .clickable (onClick = { /* Handle forgot password click */ })
+                )
             }
         }
     }
