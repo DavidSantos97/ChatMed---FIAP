@@ -7,10 +7,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -23,11 +25,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import br.com.fiap.chatmed.R
 import br.com.fiap.chatmed.ui.theme.ChatMEDTheme
 
 @Composable
-fun SignUpScreen(){
+fun SignUpScreen(navController: NavController){
 
     Box(
         modifier = Modifier
@@ -56,7 +59,7 @@ fun SignUpScreen(){
                 Text(
                     modifier = Modifier.padding(top = 20.dp),
                     text = "Helthcare",
-                    fontSize = 32.sp,
+                    fontSize = 35.sp,
                     textAlign = TextAlign.Center,
                     color = Color(0xFF1B44AC),
                     fontWeight = FontWeight.Bold
@@ -71,7 +74,7 @@ fun SignUpScreen(){
                 Text(
                     modifier = Modifier.padding(top = 1.dp),
                     text = "Vamos lá!",
-                    fontSize = 29.sp,
+                    fontSize = 25.sp,
                     textAlign = TextAlign.Center,
                     color = Color.Black,
                     fontWeight = FontWeight.Bold
@@ -84,7 +87,7 @@ fun SignUpScreen(){
                 horizontalArrangement = Arrangement.Center
             ) {
                 Text(
-                    modifier = Modifier.padding(top = 1.dp),
+                    modifier = Modifier.padding(top = 1.dp, start = 10.dp, end = 10.dp),
                     text = "Faça o login e cuide da sua saúde com a gente.",
                     fontSize = 17.sp,
                     textAlign = TextAlign.Center,
@@ -94,6 +97,7 @@ fun SignUpScreen(){
                 )
 
             }
+            Spacer(modifier = Modifier.padding(5.dp))
             Row(
                 Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center
@@ -102,7 +106,9 @@ fun SignUpScreen(){
                     modifier = Modifier
                         .padding(top = 30.dp)
                         .size(width = 200.dp, height = 48.dp),
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                              navController.navigate("Login")
+                    },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFF17DB2E)
                     )
@@ -124,7 +130,9 @@ fun SignUpScreen(){
                     modifier = Modifier
                         .padding(top = 15.dp)
                         .size(width = 200.dp, height = 48.dp),
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                              navController.navigate("Cadastro")
+                    },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color.White),
                     border = BorderStroke(1.dp, Color(0xFF17DB2E))
@@ -150,10 +158,11 @@ fun SignUpScreen(){
 
 
 
-@Preview(showBackground = true)
-@Composable
-fun signUpScreenPreview() {
-    ChatMEDTheme {
-        SignUpScreen()
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun SignUpScreenPreview() {
+//    ChatMEDTheme {
+//        SignUpScreen()
+//    }
+//}
+

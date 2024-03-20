@@ -45,12 +45,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import br.com.fiap.chatmed.R
 import br.com.fiap.chatmed.ui.theme.ChatMEDTheme
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun LoginScreen() {
+fun LoginScreen(navController: NavController) {
 
     var emailState = remember {
         mutableStateOf("")
@@ -85,7 +86,7 @@ fun LoginScreen() {
                 ) {
                     Button(
                         modifier = Modifier.align(Alignment.BottomStart),
-                        onClick = { /*TODO*/ },
+                        onClick = { navController.navigate("SignUp")},
                         colors = ButtonDefaults.buttonColors(Color.Transparent)
                     ) {
                         Icon(
@@ -265,7 +266,7 @@ fun LoginScreen() {
                     fontWeight = FontWeight.Bold,
                     fontSize = 15.sp,
                     modifier = Modifier
-                        .clickable (onClick = { /* Handle forgot password click */ })
+                        .clickable (onClick = { navController.navigate("Cadastro") })
                 )
             }
 
@@ -344,10 +345,10 @@ fun LoginScreen() {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun loginScreenPreview() {
-    ChatMEDTheme {
-        LoginScreen()
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun LoginScreenPreview() {
+//    ChatMEDTheme {
+//        LoginScreen()
+//    }
+//}

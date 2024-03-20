@@ -47,12 +47,13 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import br.com.fiap.chatmed.R
 import br.com.fiap.chatmed.ui.theme.ChatMEDTheme
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun CadastroScreen() {
+fun CadastroScreen(navController: NavController) {
 
     var telefoneState = remember {
         mutableStateOf("")
@@ -98,7 +99,7 @@ fun CadastroScreen() {
                 ){
                     Button(
                         modifier = Modifier.align(Alignment.BottomStart),
-                        onClick = { /*TODO*/ },
+                        onClick = { navController.navigate("SignUp")},
                         colors = ButtonDefaults.buttonColors(Color.Transparent)
                     ) {
                         Icon(
@@ -398,7 +399,9 @@ fun CadastroScreen() {
                 Button(
                     modifier = Modifier
                         .size(width = 300.dp, height = 48.dp),
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                              navController.navigate("Login")
+                    },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFF17DB2E)
                     )
@@ -419,14 +422,15 @@ fun CadastroScreen() {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(text = "Já possui cadastro ?  ",
-                    fontSize = 15.sp
+                    fontSize = 15.sp,
+                    color = Color.Black
                 )
                 Text(text = "Entre",
                     color = Color(0xFF17DB2E),
                     fontWeight = FontWeight.Bold,
                     fontSize = 15.sp,
                     modifier = Modifier
-                        .clickable (onClick = { /* Handle forgot password click */ })
+                        .clickable (onClick = { navController.navigate("Login")})
                 )
             }
         }
@@ -434,10 +438,10 @@ fun CadastroScreen() {
 
 }
 
-@Preview(showBackground = true)
-@Composable
-fun cadastroScreenPreview() {
-    ChatMEDTheme {
-        CadastroScreen()
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun cadastroScreenPreview() {
+//    ChatMEDTheme {
+//        CadastroScreen()
+//    }
+//}
