@@ -86,6 +86,11 @@ dependencies {
         // Jetpack Compose Integration
         implementation("androidx.navigation:navigation-compose:$nav_version")
 
+        // Dependência da Animação
+        implementation("com.google.accompanist:accompanist-navigation-animation:0.34.0")
+
+        //Dependencia livedata
+        implementation("androidx.compose.runtime:runtime-livedata:1.6.3")
 
     }
 }

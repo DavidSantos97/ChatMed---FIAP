@@ -14,16 +14,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -35,19 +29,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.com.fiap.chatmed.R
-import br.com.fiap.chatmed.ui.theme.ChatMEDTheme
+import br.com.fiap.chatmed.components.CaixaDeEntrada
+import br.com.fiap.chatmed.components.EntradaSenha
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -119,100 +109,33 @@ fun LoginScreen(navController: NavController) {
                     contentDescription = "Logo ChatMED"
                 )
             }
-            Row {
-                OutlinedTextField(
-                    modifier = Modifier
-                        .padding(top = 30.dp, start = 10.dp, end = 10.dp)
-                        .fillMaxWidth(),
-                    value = emailState.value,
-                    onValueChange = { emailState.value = it },
-                    placeholder = {
-                        Box(modifier = Modifier.fillMaxWidth()
-                        ){
-                            Icon(
-                                painter = painterResource(id = R.drawable.email),
-                                contentDescription = "Icone email",
-                                tint = Color.Gray,
-                                modifier = Modifier.size(25.dp)
-                            )
-                            Text(
-                                text = "E-mail",
-                                color = Color.Gray,
-                                modifier = Modifier.padding(start = 40.dp)
-                            )
-
-                        }
-
-                    },
-                    textStyle = TextStyle(color = Color.Black, fontSize = 18.sp),
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = Color(0xFF17DB2E),
-                        unfocusedBorderColor = Color.Gray,
-                        cursorColor = Color.Transparent,
-                    ),
-                    shape = RoundedCornerShape(size = 8.dp),
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
-
-                )
-            }
-            Row {
-                OutlinedTextField(
-                    modifier = Modifier
-                        .padding(top = 30.dp, start = 10.dp, end = 10.dp)
-                        .fillMaxWidth(),
-                    value = senhaState.value,
-                    onValueChange = { senhaState.value = it },
-                    placeholder = {
-                        Box(modifier = Modifier.fillMaxWidth()
-                        ){
-                            Icon(
-                                painter = painterResource(id = R.drawable.senha),
-                                contentDescription = "Icone senha",
-                                tint = Color.Gray,
-                                modifier = Modifier.size(25.dp)
-                            )
-                            Text(
-                                text = "Senha",
-                                color = Color.Gray,
-                                modifier = Modifier.padding(start = 40.dp)
-                            )
-
-                        }
-
-
-                    },
-                    textStyle = TextStyle(color = Color.Black, fontSize = 18.sp),
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = Color(0xFF17DB2E),
-                        unfocusedBorderColor = Color.Gray,
-                        cursorColor = Color.Transparent,
-                    ),
-                    shape = RoundedCornerShape(size = 8.dp),
-                    keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-                    keyboardActions = KeyboardActions(
-                        onDone = { keyboardController?.hide() }
-                    ),
-                    trailingIcon = {
-                        IconButton(onClick = { senhaVisibility.value = !senhaVisibility.value })
-                        {
-                            val icon = if (senhaVisibility.value) {
-                                painterResource(id = R.drawable.olho_fecha)
-                            } else {
-                                painterResource(id = R.drawable.olho_abre)
-                            }
-                            Icon(
-                                modifier = Modifier.size(25.dp),
-                                painter = icon,
-                                tint = Color.Gray,
-                                contentDescription = if (senhaVisibility.value) "Esconder Senha" else "Visualizar Senha"
-                            )
-                        }
-                    },
-                    visualTransformation = if (senhaVisibility.value) PasswordVisualTransformation() else VisualTransformation.None,
-                    singleLine = true
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-            }
+            CaixaDeEntrada(
+                placeHolder = "E-mail",
+                value = emailState.value,
+                keyboardtype = KeyboardType.Email,
+                modifier = Modifier
+                    .padding(top = 30.dp, start = 15.dp, end = 15.dp)
+                    .fillMaxWidth(),
+                icon = R.drawable.email,
+                descricaoIcon = "icone email",
+                atualizarEstado = {
+                    emailState.value = it
+                }
+            )
+            EntradaSenha(
+                placeHolder = "Senha",
+                value = senhaState.value,
+                modifier = Modifier
+                    .padding(top = 30.dp, start = 15.dp, end = 15.dp)
+                    .fillMaxWidth(),
+                keyboardtype = KeyboardType.Text,
+                icon = R.drawable.senha,
+                descricaoIcon = "icone senha",
+                atualizarEstadoSenha = {
+                    senhaState.value = it
+                }
+            )
+            Spacer(modifier = Modifier.height(8.dp))
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
