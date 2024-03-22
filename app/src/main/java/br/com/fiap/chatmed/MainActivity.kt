@@ -15,6 +15,7 @@ import br.com.fiap.chatmed.screens.CadastroScreen
 import br.com.fiap.chatmed.screens.LoginScreen
 import br.com.fiap.chatmed.screens.SignUpScreen
 import br.com.fiap.chatmed.screens.CadastroScreenViewModel
+import br.com.fiap.chatmed.screens.loginScreenViewModel
 import br.com.fiap.chatmed.ui.theme.ChatMEDTheme
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
@@ -52,7 +53,7 @@ class MainActivity : ComponentActivity() {
                             SignUpScreen(navController)
                         }
                         composable(route = "Login"){
-                            LoginScreen(navController)
+                            LoginScreen(loginScreenViewModel(), navController)
                         }
                         composable(route = "Cadastro"){
                             CadastroScreen(CadastroScreenViewModel(),navController)

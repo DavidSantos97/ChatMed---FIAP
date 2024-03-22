@@ -20,6 +20,7 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -41,14 +42,16 @@ import br.com.fiap.chatmed.components.EntradaSenha
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun LoginScreen(navController: NavController) {
+fun LoginScreen(loginScreenViewModel: loginScreenViewModel, navController: NavController) {
 
-    var emailState = remember {
-        mutableStateOf("")
-    }
-    var senhaState = remember {
-        mutableStateOf("")
-    }
+//    var emailState = remember {
+//        mutableStateOf("")
+//    }
+    val emailState = loginScreenViewModel.emailState.observeAsState(initial = "")
+//    var senhaState = remember {
+//        mutableStateOf("")
+//    }
+    val senhaState = loginScreenViewModel.senhaState.observeAsState(initial = "")
     val senhaVisibility = remember { mutableStateOf(false) }
 
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -119,7 +122,7 @@ fun LoginScreen(navController: NavController) {
                 icon = R.drawable.email,
                 descricaoIcon = "icone email",
                 atualizarEstado = {
-                    emailState.value = it
+                    loginScreenViewModel.onEmailCapitalChanged(it)
                 }
             )
             EntradaSenha(
@@ -132,7 +135,7 @@ fun LoginScreen(navController: NavController) {
                 icon = R.drawable.senha,
                 descricaoIcon = "icone senha",
                 atualizarEstadoSenha = {
-                    senhaState.value = it
+                   loginScreenViewModel.onSenhaCapitalChanged(it)
                 }
             )
             Spacer(modifier = Modifier.height(8.dp))

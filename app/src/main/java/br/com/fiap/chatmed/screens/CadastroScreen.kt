@@ -11,7 +11,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.ClickableText
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
@@ -27,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -40,10 +43,18 @@ import androidx.navigation.NavController
 import br.com.fiap.chatmed.R
 import br.com.fiap.chatmed.components.CaixaDeEntrada
 import br.com.fiap.chatmed.components.EntradaSenha
+import br.com.fiap.chatmed.database.repository.UsuarioRepository
+import br.com.fiap.chatmed.model.Usuario
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun CadastroScreen(cadastroScreenViewModel: CadastroScreenViewModel, navController: NavController) {
+fun CadastroScreen(
+    cadastroScreenViewModel: CadastroScreenViewModel,
+    navController: NavController
+) {
+
+//    val context = LocalContext.current
+//    val usuarioRepository = UsuarioRepository(context)
 
     val nameState = cadastroScreenViewModel.nomeState.observeAsState(initial = "")
 
@@ -76,7 +87,8 @@ fun CadastroScreen(cadastroScreenViewModel: CadastroScreenViewModel, navControll
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(20.dp),
+                .padding(20.dp)
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
             //verticalArrangement = Arrangement.Center,
 
